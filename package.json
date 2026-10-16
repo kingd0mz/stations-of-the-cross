@@ -1,0 +1,27 @@
+{
+  "name": "stations-of-the-cross",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "dependencies": {
+    "expo": "~57.0.0",
+    "expo-dev-client": "~57.0.20",
+    "expo-status-bar": "~57.0.1",
+    "react": "19.2.3",
+    "react-native": "0.86.3"
+  },
+  "devDependencies": {
+    "@types/react": "~19.2.4",
+    "eslint": "^9.0.0",
+    "eslint-config-expo": "~57.0.2",
+    "typescript": "~6.0.3"
+  },
+  "scripts": {
+    "start": "expo start",
+    "start:go": "expo start --go",
+    "android": "expo run:android --device",
+    "typecheck": "tsc --noEmit",
+    "lint": "expo lint",
+    "export:android": "expo export --platform android"
+  },
+  "private": true
+}

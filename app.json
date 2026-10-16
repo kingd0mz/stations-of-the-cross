@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "Stations of the Cross",
+    "slug": "stations-of-the-cross",
+    "version": "1.0.0",
+    "platforms": [
+      "android"
+    ],
+    "scheme": "stations-of-the-cross",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "android": {
+      "package": "com.kingd0mz.stationsofthecross",
+      "versionCode": 1,
+      "permissions": [],
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "extra": {
+      "eas": {
+        "projectId": "644301ab-7442-4915-87ce-8eb9a64ed709"
+      }
+    },
+    "owner": "kingd0mz",
+    "plugins": [
+      "expo-status-bar"
+    ]
+  }
+}

@@ -7,16 +7,29 @@ export const PAGE_IDS = [
 export type PageId = (typeof PAGE_IDS)[number];
 export type Language = 'en' | 'fil';
 
-// Approved text must record both its source and permission/ public-domain basis.
+export type SourceLocation = {
+  document: string;
+  // Physical PDF page numbers, starting at 1; a passage may span pages.
+  pages: readonly number[];
+};
+
+// Transcription review and text permission are independent: an authorized text
+// can remain a draft until its wording has completed editorial review.
 export type BookletText =
   | { status: 'placeholder'; text: string }
-  | { status: 'verified'; text: string; source: string; rights: string };
+  | { status: 'draft'; text: string; source: SourceLocation; rights: 'unconfirmed' | 'user-confirmed-text-permission'; reviewNotes: readonly string[] }
+  | { status: 'verified'; text: string; source: SourceLocation; rights: string };
 
-export type Section =
-  | { kind: 'scripture'; reading: BookletText; reference: BookletText }
-  | { kind: 'responses'; turns: { role: 'leader' | 'all'; text: BookletText }[] }
+export type Section = {
+  // Use the source heading verbatim, or null if the source has no heading.
+  heading?: string | null;
+  note?: BookletText;
+} & (
+  | { kind: 'scripture'; reading: BookletText; reference: BookletText; referencePosition?: 'before' | 'after' }
+  | { kind: 'responses'; turns: { role: 'leader' | 'all'; cue?: string | null; text: BookletText }[] }
   | { kind: 'reflection' | 'prayer' | 'hymn'; text: BookletText }
-  | { kind: 'pause'; text: BookletText };
+  | { kind: 'pause'; text: BookletText }
+);
 
 export type Illustration =
   | { status: 'placeholder'; description: string }
@@ -27,7 +40,8 @@ export type BookletPage = {
   station?: number;
   numeral?: string;
   title: string;
-  titleStatus: 'station-label' | 'placeholder';
+  titleStatus: 'station-label' | 'placeholder' | 'draft';
+  titleSource?: SourceLocation;
   illustration?: Illustration;
   sections: Section[];
 };

@@ -47,3 +47,8 @@ credentials.json
 
 # local assistant settings
 .claude/
+
+# Source scans and restricted draft transcriptions; never import into public bundles
+/private-booklet/
+/assets/stations-of-the-cross.pdf
+/assets/bagong-daan-ng-krus.pdf

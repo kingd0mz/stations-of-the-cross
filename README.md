@@ -3,6 +3,13 @@
 Offline booklet reader for Android built with Expo SDK 57, React Native, and TypeScript.
 Application ID: `com.kingd0mz.stationsofthecross`. Initial version: `1.0.0` (Android version code `1`).
 
+Sprint 2 includes the full English booklet text in the normal reader. The user
+confirmed text permission on 2026-10-16. Both English and Filipino are fully transcribed drafts
+pending final proofreading against their separate supplied PDFs. Original illustrations will
+be created separately. See [SPRINT_2.md](SPRINT_2.md) for acceptance status and
+manual tests, [CONTENT.md](CONTENT.md) for permission and attribution status, and
+[TRANSCRIPTION_REVIEW.md](TRANSCRIPTION_REVIEW.md) for unresolved wording.
+
 ## Setup
 
 Use Node.js 22.13 or newer and npm.
@@ -67,8 +74,8 @@ npx expo-doctor
 npm run export:android
 ```
 
-The dependency-free Node test suite checks both editions' page IDs and placeholder
-status, navigation boundaries, direction locking and multi-touch cancellation,
+The dependency-free Node test suite checks both editions' page IDs, content coverage and permission metadata, source
+references and speaker cues, navigation boundaries, direction locking and multi-touch cancellation,
 saved-value validation, read failures, and ordered writes recovering from errors.
 An export check alone does not verify a phone launch or native gestures.
 
@@ -82,7 +89,7 @@ An export check alone does not verify a phone launch or native gestures.
 3. Open **Pages**, jump to XIV, close the selector with Android Back, then use
    **Start from Beginning**. Previous/Next stop at the booklet boundaries.
 4. At a middle station, select FIL. The same station remains selected, with visibly
-   marked Filipino placeholders rather than English prayer text. Switch back to EN.
+   Filipino prayers and NAMUMUNO/TUGON cues from its own PDF, with a draft notice. Switch back to EN.
 5. Increase text with **A+**; check scrolling and all controls on a small screen,
    also with Android's large system font/display settings. Decrease with **A−**.
 6. Choose FIL, a middle station, and a larger font. Wait a moment for local storage,
@@ -130,8 +137,9 @@ Keep-screen-awake and a PWA are intentionally outside this implementation. Compo
 use React Native primitives and local assets to allow a future Expo Web target;
 web packaging and hosting are not configured.
 
-Prayer material and illustrations await verified editions and redistribution rights.
-See [CONTENT.md](CONTENT.md) before adding any devotional text or images.
+Text permission is confirmed by the user. English is bundled pending final
+proofreading; Filipino is also fully transcribed pending final proofreading. Original illustrations are planned.
+See [CONTENT.md](CONTENT.md) for attribution and source details.
 
 ## GitHub issues #1–#6
 
@@ -141,10 +149,10 @@ This table describes implemented behavior, not a claim of physical-device valida
 | Issue | Implemented | Outstanding |
 | --- | --- | --- |
 | #1 Setup | Existing SDK 57 project, identity, EAS profiles, bundled assets, no services | SDK 57 APK build and physical Android launch; historical SDK 58 build is linked above |
-| #2 Content | Typed English/Filipino files; stable IDs; scripture/reference, responses, reflection, prayer, pause, hymn, illustration structures | Exact booklet identification, verified texts/transcription, Filipino edition, proofreading, rights/credits; all passages remain placeholders |
+| #2 Content | Both supplied editions transcribed and bundled with user-confirmed permission: English 63 sections, Filipino 90; source locations and review notes | Final independent proofreading, source typo/citation decisions, attribution details |
 | #3 Reader | All 16 pages, horizontal/vertical navigation with direction lock, selector, restart, bounded buttons; no effects/login | Phone gesture and small-screen usability checks; complete prayers depend on #2 |
 | #4 Design | Warm paper/red/native text, distinct Leader/All styles, responsive line width, font controls; no remote fonts/images | Authorized optimized illustrations, low-end-phone testing, source fidelity review, release download-size measurement/under-10-MB goal |
-| #5 Language | Bundled EN/FIL toggle, common IDs preserve station, localized UI and explicit Filipino placeholders | Complete verified bilingual prayer material; phone/offline checks |
+| #5 Language | Bundled EN/FIL toggle, common IDs preserve station, localized UI and full source-specific Filipino draft | Complete verified bilingual prayer material; phone/offline checks |
 | #6 Persistence | AsyncStorage page/language/font, validation, hydration gate, restart, storage errors | Phone close/reopen check; optional keep-screen-awake omitted |
 
 The PNGs in `assets/` are Expo template icon placeholders (including adaptive and
